@@ -8,3 +8,13 @@ Types will have various info: from building material to specific projecting info
 Also there will be **social part** - account system and forums where people can discuss specific series and houses.
 
 ![SADB](https://github.com/user-attachments/assets/4d7e6045-e3cf-436f-93ac-85a41da789fa)
+
+
+# Description
+
+      Main page (index)
+       |      |     |
+      \ /     |    \ /
+   Series DB \ /  Login --> Forum
+      | "City plan" DB -------^ ^
+      L_________________________/
