@@ -1,0 +1,28 @@
+@font-face {
+  font-family: Revoluzia;
+  src: local(Revoluzia) format(opentype),
+       url(http://127.0.0.1:8080/static/fonts/Revoluzia/Revoluzia.otf) format(opentype);
+}
+h1 {
+  color: #1a1a1a;
+  text-align: center;
+  font-family: Revoluzia;
+  font-size: 60px;
+}
+h2 {
+  color: #202020;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 40px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+p {
+  color: #202020;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 25px;
+}
