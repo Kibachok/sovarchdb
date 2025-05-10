@@ -1,0 +1,45 @@
+@font-face {
+  font-family: Revoluzia;
+  src: local(Revoluzia) format(opentype),
+       url(http://127.0.0.1:8080/static/fonts/Revoluzia/Revoluzia.otf) format(opentype);
+}
+h1 {
+  padding: 10px;
+  background-color: #ff4a4a;
+  color: #1a1a1a;
+  color: #ffdf5c;
+  text-align: center;
+  font-family: Revoluzia;
+  font-size: 60px;
+}
+h2 {
+  padding: 5px;
+  border: 5px solid #ccccff;
+  background-color: #acacff;
+  color: #202020;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 40px;
+}
+p {
+  color: #202020;
+  text-align: center;
+  font-family: Sans-serif;
+  font-size: 25px;
+}
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.row {
+  padding: 10px;
+  background-color: #dedeff;
+  display: flex;
+  justify-content: space-between;
+}
+.header {
+  position: fixed;
+  border: 20px;
+  background-color: #acacff;
+}
