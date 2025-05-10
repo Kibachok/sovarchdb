@@ -7,7 +7,7 @@ Base = declarative_base()
 # ========== ТАБЛИЦЫ ==========
 class Region(Base):
     __tablename__ = 'regions'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
     climate_zone = Column(String, nullable=False)
     series = relationship("Series", back_populates="region")
@@ -15,7 +15,7 @@ class Region(Base):
 
 class Series(Base):
     __tablename__ = 'series'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
     period = Column(Integer, nullable=True)
     material = Column(Integer, nullable=True)
@@ -28,21 +28,21 @@ class Series(Base):
 
 class City(Base):
     __tablename__ = 'cities'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(100), nullable=False, unique=True)
     houses = relationship("House", back_populates="city")
 
 
 class HouseType(Base):
     __tablename__ = 'house_types'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String(50), nullable=False, unique=True)
     houses = relationship("House", back_populates="type")
 
 
 class House(Base):
     __tablename__ = 'houses'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     type_id = Column(Integer, ForeignKey('house_types.id'), nullable=True)
     series_id = Column(Integer, ForeignKey('series.id'), nullable=True)
     city_id = Column(Integer, ForeignKey('cities.id'), nullable=False)
@@ -66,7 +66,7 @@ class House(Base):
 
 class Users(Base):
     __tablename__ = 'Users'
-    id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     login = Column(String, nullable=False)
     password = Column(String, nullable=True)
     nickname = Column(String, nullable=True)
