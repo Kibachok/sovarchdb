@@ -1,0 +1,34 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <!-- profile - head part (avatar, nickname, username) -->
+  <h2 class="obvod_header">{{ sid }} - types</h2>
+  <div class="row_left area_padding_soft">
+    <div class="row_left">
+      <h3>Sort by:</h3>
+      <ul>
+        <li>period override</li>
+      </ul>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead style="background-color: #f5e5ff">
+      <tr>
+        <th><h4>Type suffix</h4></th>
+        <th><h4>Period override</h4></th>
+        <th><h4>Region</h4></th>
+        <th><h4>Description</h4></th>
+        <th><h4>Images</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p><a href="/series/1/types/1">16S</a></p></td>
+        <td><p>BRZH</p></td>
+        <td><p>Yug</p></td>
+        <td><p>General, first and most popular panel house all across soviet union/post-soviet space</p></td>
+        <td><p>[images]</p></td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
