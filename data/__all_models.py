@@ -26,6 +26,17 @@ class Series(Base):
     houses = relationship("House", back_populates="series")
 
 
+class TypeTable(Base):
+    __tablename__ = 'type_tables'
+    id = Column(Integer, primary_key=True, index=True, autoincrement=True)
+    base_series = Column(Integer, ForeignKey('series.id'), nullable=False)
+    name = Column(String(50), nullable=False)
+    override_period = Column(Integer, nullable=True)
+    description = Column(String(500), nullable=True)
+    forumlink = Column(String(200), nullable=True)
+    series = relationship("Series", back_populates="types")
+
+
 class City(Base):
     __tablename__ = 'cities'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
@@ -65,7 +76,7 @@ class House(Base):
 
 
 class Users(Base):
-    __tablename__ = 'Users'
+    __tablename__ = 'users'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     login = Column(String, nullable=False)
     password = Column(String, nullable=True)
