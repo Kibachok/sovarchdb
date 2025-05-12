@@ -15,6 +15,6 @@ Also there will be **social part** - account system and forums where people can 
       Main page (index)
        |      |     |
       \ /     |    \ /
-   Series DB \ /  Login --> Forum
+    SeriesDB \ /  Login --> Forum
       | "City plan" DB -------^ ^
       L_________________________/

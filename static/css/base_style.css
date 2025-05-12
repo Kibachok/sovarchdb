@@ -1,8 +1,10 @@
+/* revoluzia font */
 @font-face {
   font-family: Revoluzia;
   src: local(Revoluzia) format(opentype),
        url(http://127.0.0.1:8080/static/fonts/Revoluzia/Revoluzia.otf) format(opentype);
 }
+/* headers mod */
 h1 {
   padding: 10px;
   background-color: #ff4a4a;
@@ -13,33 +15,66 @@ h1 {
   font-size: 60px;
 }
 h2 {
-  padding: 5px;
-  border: 5px solid #ccccff;
-  background-color: #acacff;
   color: #202020;
   text-align: center;
   font-family: Sans-serif;
   font-size: 40px;
+  font-weight: bold;
 }
+/* default paragraph mod */
 p {
   color: #202020;
   text-align: center;
   font-family: Sans-serif;
   font-size: 25px;
 }
+/* centers the content */
 .center {
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: auto;
 }
+/* make the content single row with colored area */
 .row {
-  padding: 10px;
-  background-color: #dedeff;
   display: flex;
   justify-content: space-between;
 }
+/* same as .row, but left margin */
+.row_left {
+  display: flex;
+}
+/* base header class (sabd text) */
 .header {
+  width: 100%;
   position: fixed;
   border: 20px;
   background-color: #acacff;
+}
+/* golden text */
+.gtext {
+  font-family: Revoluzia;
+  color: #ffdf5c
+}
+.weak_text {
+  color: #6a6a6a
+}
+/* obvodka for content */
+.obvod {
+  padding: 10px;
+  background-color: #3e3e3e;
+}
+/* obvodka for headers (h2) */
+.obvod_header {
+  padding: 5px;
+  border: 5px solid #ccccff;
+  background-color: #acacff;
+}
+/* blue padding for area objects */
+.area_padding_b {
+  padding: 10px;
+  background-color: #dedeff;
+}
+/* soft gray padding for area objects */
+.area_padding_soft {
+  padding: 10px;
+  background-color: #d5d5d5;
 }
