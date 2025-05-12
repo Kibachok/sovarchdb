@@ -19,10 +19,7 @@ class Series(Base):
     name = Column(String, nullable=False)
     period = Column(Integer, nullable=True)
     material = Column(Integer, nullable=True)
-    region_id = Column(Integer, ForeignKey('regions.id'), nullable=True)
     description = Column(String, nullable=True)
-    forumlink = Column(String, nullable=True)
-    region = relationship("Region", back_populates="series")
     houses = relationship("House", back_populates="series")
 
 
@@ -33,8 +30,9 @@ class TypeTable(Base):
     name = Column(String(50), nullable=False)
     override_period = Column(Integer, nullable=True)
     description = Column(String(500), nullable=True)
-    forumlink = Column(String(200), nullable=True)
     series = relationship("Series", back_populates="types")
+    region = relationship("Region", back_populates="series")
+    region_id = Column(Integer, ForeignKey('regions.id'), nullable=True)
 
 
 class City(Base):
