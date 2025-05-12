@@ -1,0 +1,44 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <!-- profile - head part (avatar, nickname, username) -->
+  <h2 class="obvod_header">Series</h2>
+  <div class="row_left area_padding_soft">
+    <div class="row_left">
+      <h3>Filter by:</h3>
+      <ul>
+        <li>Period [dropdown]</li>
+        <li>Material [dropdown]</li>
+        <li>Climatic region [dropdown]</li>
+      </ul>
+    </div>
+    <div class="row_left">
+      <h3>Sort by:</h3>
+      <ul>
+        <li>Date</li>
+      </ul>
+    </div>
+  </div>
+  <table class="table table-bordered">
+    <thead style="background-color: #f5e5ff">
+      <tr>
+        <th><h4>Series</h4></th>
+        <th><h4>Period</h4></th>
+        <th><h4>Material</h4></th>
+        <th><h4>Description</h4></th>
+        <th><h4>Images</h4></th>
+        <th><h4>Types</h4></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><p><a href="/series/1">1-335</a></p></td>
+        <td><p>HRUSCH</p></td>
+        <td><p>Panel</p></td>
+        <td><p>General, first and most popular panel house all across soviet union/post-soviet space</p></td>
+        <td><p>[images]</p></td>
+        <td><p>1-335AS [link], 1-335AK [link]</p></td>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

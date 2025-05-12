@@ -1,0 +1,15 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <h2 class="obvod_header">Series - {{ sid }}</h2>
+  <div class="area_padding_soft">
+    <h3>Period - [period]</h3>
+    <h3>Material</h3>
+    <h3 style="text-align: center">Description:</h3>
+    <p style="text-align: center">[description]</p>
+    <h3 style="text-align: center"><a href="/series/{{ sid}}/types">Click here</a> to see types list</h3>
+    <h3 style="text-align: center"><a href="/">Click here</a> to see its discussions category</h3>
+  </div>
+  <h3 style="text-align: center">Gallery</h3>
+  <p>some images, maybe with bootstrap-carousel<br>also there will probably be some file loader for high role</p>
+{% endblock %}
