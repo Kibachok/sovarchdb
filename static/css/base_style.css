@@ -78,3 +78,15 @@ p {
   padding: 10px;
   background-color: #d5d5d5;
 }
+.area_padding_danger {
+  padding: 10px;
+  background-color: #ef7d5a;
+}
+/* margin elem to right */
+.r_margin {
+  position: fixed;
+  display: inline-block;
+  float: right;
+  right: 20px;
+  margin-top: 20px
+}
