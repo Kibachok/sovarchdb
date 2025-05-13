@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField, IntegerField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, EmailField, IntegerField, BooleanField, FileField
 from wtforms.validators import DataRequired, equal_to, length
 
 
@@ -33,6 +33,7 @@ class LoginForm(FlaskForm):
     """User login form class, includes:\n
     username [**uname**],\n
     password [**passwd**],\n
+    remember me [**rmmb**],\n
     default submission field [**submit**]"""
     uname = StringField('Username (for system login)', validators=[DataRequired(),
                                                                    length(max=50, message='Too long username')])
@@ -42,4 +43,24 @@ class LoginForm(FlaskForm):
                                        length(min=8, max=50, message="Minimum requirement for length is 8, limit is 50")
                                        ])
 
+    rmmb = BooleanField('Remember me')
+
     submit = SubmitField('Log in')
+
+
+class UprofileForm(FlaskForm):
+    """User login form class, includes:\n
+    username [**uname**],\n
+    password [**passwd**],\n
+    remember me [**rmmb**],\n
+    default submission field [**submit**]"""
+    nickname = StringField('Nickname',
+                           validators=[length(max=50, message='Too long nickname (limit is 50)')])
+
+    rolecode = StringField('Role code [WIP]')
+
+    save = BooleanField('Save changes', default=True)
+
+    delete = BooleanField('Delete profile', default=False)
+
+    submit = SubmitField('Submit')
