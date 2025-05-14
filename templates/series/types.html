@@ -2,7 +2,7 @@
 
 {% block content %}
   <!-- profile - head part (avatar, nickname, username) -->
-  <h2 class="obvod_header">{{ sid }} - types</h2>
+  <h2 class="obvod_header">{{ serie }} - types</h2>
   <div class="row_left area_padding_soft">
     <div class="row_left">
       <h3>Sort by:</h3>
@@ -11,6 +11,7 @@
       </ul>
     </div>
   </div>
+{% if typelist|length != 0 %}
   <table class="table table-bordered">
     <thead style="background-color: #f5e5ff">
       <tr>
@@ -21,14 +22,21 @@
         <th><h4>Images</h4></th>
       </tr>
     </thead>
+    {% for type in typelist %}
     <tbody>
       <tr>
-        <td><p><a href="/series/1/types/1">16S</a></p></td>
-        <td><p>BRZH</p></td>
-        <td><p>Yug</p></td>
-        <td><p>General, first and most popular panel house all across soviet union/post-soviet space</p></td>
+        <td><p><a href="/series/{{ sid }}/types/{{ loop.index - 1 }}">{{ type.name }}</a></p></td>
+        <td><p>{{ type.override_period }}</p></td>
+        <td><p>{{ type.region }}</p></td>
+        <td><p>{{ type.description }}</p></td>
         <td><p>[images]</p></td>
       </tr>
     </tbody>
+    {% endfor %}
   </table>
+{% else %}
+  <br>
+  <br>
+  <h1>The list is empty</h1>
+{% endif %}
 {% endblock %}

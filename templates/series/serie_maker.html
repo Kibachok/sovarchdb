@@ -1,0 +1,47 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <h1>Serie - new</h1>
+  <img src="/static/img/login.png" alt="login" height="256" width="256" class="center">
+  <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.name.label }}</b></h3>
+            {{ form.name(class="form-control") }}<br><br>
+        {% for error in form.name.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.desc.label }}</b></h3>
+            {{ form.desc(class="form-control") }}<br><br>
+        {% for error in form.desc.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.period.label }}</b></h3>
+            {{ form.period(class="form-control", type="select") }}<br><br>
+        {% for error in form.period.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.mat.label }}</b></h3>
+            {{ form.mat(class="form-control", type="select") }}<br><br>
+        {% for error in form.mat.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <br>
+        <p>{{ form.submit(type="submit", class="btn btn-primary", style="font-size: 30px; font-weight: bold") }}</p>
+  </form>
+{% endblock %}
