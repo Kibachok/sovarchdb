@@ -47,5 +47,12 @@ def img_validator(f: FileStorage, size_limit, endname, resize_bounds=(-1, -1), d
         mkdir(f'{"/".join(endname.split('/')[:-1])}/')
     except FileExistsError:
         pass
-    img.save(endname + '.jpg')
+    try:
+        img.split()[3]
+    except IndexError:
+        img.save(endname + '.jpg', format='JPEG', quality=75)
+        return 'Success'
+    canv = Image.new('RGB', img.size, (0, 0, 0))
+    canv.paste(img, mask=img.split()[3])
+    canv.save(endname + '.jpg', format='JPEG', quality=75)
     return 'Success'

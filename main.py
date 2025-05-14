@@ -9,7 +9,7 @@ from data.validate import validate_periods, validate_materials
 # --API--
 import api.user as api_usr
 # --Additional components--
-from forms import RegisterForm, LoginForm, UprofileForm
+from forms import RegisterForm, LoginForm, UprofileForm, SerieForm
 # from requests import get, post, put, delete
 from tools import passwd_hash, img_validator
 from os.path import isfile
@@ -184,8 +184,29 @@ def series_tab():
             dct['material'] = db_sess.get(Material, _.material).name
             dct['description'] = _.description
             dct['types'] = db_sess.query(TypeTable).filter(TypeTable.base_series == _.id).all()
+            dct['img'] = isfile(f'static/img/series/{_.id}/0.jpg')
             serlist.append(dict(dct))
     return render_template('series/series.html', pgtitle="Series table", serlist=serlist)
+
+
+@app.route('/series/new', methods=['POST', 'GET'])
+def series_new():
+    if not current_user.is_authenticated:
+        abort(403)
+    form = SerieForm()
+    # when form is sent
+    if form.validate_on_submit():
+        db_sess = db.create_session()
+        serie = Series(name=form.name.data,
+                       period=db_sess.query(Period).filter(Period.name == str(form.period.data)).first().id,
+                       material=db_sess.query(Material).filter(Material.name == str(form.mat.data)).first().id,
+                       description=form.desc.data
+                       )
+        db_sess.add(serie)
+        db_sess.commit()
+        return redirect('/series')
+    # default page render
+    return render_template('series/serie_maker.html', pgtitle="Serie - new", form=form)
 
 
 @app.route('/series/<int:sid>', methods=['POST', 'GET'])
@@ -205,20 +226,70 @@ def series_specific(sid):
     except FileNotFoundError:
         files = None
     if request.method == 'POST':
-        resp = img_validator(request.files['img'], 5, f'static/img/series/{sid}/{len(listdir('static/img/series/'))}')
+        try:
+            p = f'static/img/series/{sid}/{len(listdir(f'static/img/series/{sid}'))}'
+        except FileNotFoundError:
+            p = f'static/img/series/{sid}/0'
+        resp = img_validator(request.files['img'], 5, p)
         if resp != 'Success':
             return render_template('series/serie.html', pgtitle=f"Series table - {sid}", serie=serie, imge=resp)
+        else:
+            return redirect(f'/series/{sid}')
     return render_template('series/serie.html', pgtitle=f"Series table - {sid}", serie=serie, files=files)
 
 
 @app.route('/series/<int:sid>/types')
 def types_tab(sid):
-    return render_template('series/types.html', pgtitle=f"{sid} types table", sid=sid)
+    sid = int(sid)
+    page = request.args.get('page', default=1, type=int)
+    elems = request.args.get('elems', default=50, type=int)
+    db_sess = db.create_session()
+    serie = db_sess.get(Series, sid).name
+    req_all = len(db_sess.query(TypeTable).filter(TypeTable.base_series == sid).all())
+    typelist = []
+    if req_all == 0:
+        return render_template('series/types.html', pgtitle=f"{serie} types table", typelist=typelist, serie=serie, sid=sid)
+    elif req_all <= (page - 1) * elems:
+        return redirect(
+            f'/series/{sid}/types?elems={elems}&page={req_all // elems + (1 if req_all % elems != 0 else 0)}'
+        )
+    else:
+        req_ltd = db_sess.query(TypeTable).filter(TypeTable.id.between((page - 1) * elems + 1, page * elems),
+                                                  TypeTable.base_series == sid).all()
+        for _ in req_ltd:
+            dct = dict()
+            dct['id'] = _.id
+            dct['name'] = _.name
+            if _.override_period:
+                dct['override_period'] = db_sess.get(Period, _.override_period).name
+            else:
+                dct['override_period'] = '-'
+            dct['description'] = _.description
+            if _.region:
+                dct['region'] = _.region
+            else:
+                dct['region'] = '-'
+            typelist.append(dict(dct))
+    return render_template('series/types.html', pgtitle=f"{serie} types table", typelist=typelist, serie=serie, sid=sid)
 
 
 @app.route('/series/<int:sid>/types/<int:tid>')
 def type_specific(sid, tid):
-    return render_template('series/type.html', pgtitle=f"{sid}-{tid}", sid=sid, tid=tid)
+    db_sess = db.create_session()
+    serie = db_sess.get(Series, sid)
+    try:
+        t = db_sess.query(TypeTable).filter(TypeTable.base_series == serie.id).all()[tid]
+    except IndexError:
+        abort(404)
+    serie = serie.name
+    typ = {
+        'id': t.id,
+        'name': t.name,
+        'period': db_sess.get(Period, t.override_period).name,
+        'region': t.region,
+        'description': t.description
+    }
+    return render_template('series/type.html', pgtitle=f"{serie}-{typ['name']}", sid=sid, serie=serie, type=typ)
 
 
 # --Error parsers--
