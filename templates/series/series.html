@@ -38,12 +38,15 @@
         <td><p>{{ series["period"] }}</p></td>
         <td><p>{{ series["material"] }}</p></td>
         <td><p>{{ series["description"] }}</p></td>
-        <td><p>[images]</p></td>
-        <td><p>{% for type in series["types"] %}<a href="/series/{{ series['id'] }}/types/{{ type.id }}"> {{ type.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p></td>
+        <td><p>{% if series.img %}<img src="/static/img/series/{{ series.id }}/0.jpg">{% endif %}</p></td>
+        <td><p>{% for type in series["types"] %}<a href="/series/{{ series['id'] }}/types/{{ loop.index - 1 }}"> {{ type.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}</p></td>
       </tr>
       {% endfor %}
     </tbody>
   </table>
+  {% if current_user.is_authenticated %}
+    <h2><a href="/series/new" class="btn btn-warning"><h3>Add a new serie</h3></a></h2>
+  {% endif %}
 {% else %}
   <br>
   <br>

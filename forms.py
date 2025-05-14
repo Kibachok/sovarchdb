@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, EmailField, IntegerField, BooleanField, FileField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, BooleanField, FileField, SelectField
 from wtforms.validators import DataRequired, equal_to, length
 
 
@@ -62,5 +62,24 @@ class UprofileForm(FlaskForm):
     save = BooleanField('Save changes', default=True)
 
     delete = BooleanField('Delete profile', default=False)
+
+    submit = SubmitField('Submit')
+
+
+class SerieForm(FlaskForm):
+    """Serie form, includes:\n
+    serie name [**name**],\n
+    description [**desc**],\n
+    material dropdown [**mat**],\n
+    period dropdown [**period**],\n
+    default submission field [**submit**]"""
+    name = StringField('Serie name', validators=[DataRequired(), length(max=50, message='Too long name (limit is 50)')])
+
+    mat = SelectField('Material', choices=('Panel', 'Brick', 'Block', 'Monolith'), validators=[DataRequired()])
+
+    period = SelectField('Material', choices=('STAL', 'HRUSCH', 'BRZH', 'GORB', 'ELTS', 'PTN'),
+                         validators=[DataRequired()])
+
+    desc = StringField('Description', validators=[length(max=500, message='Too long description (limit is 500')])
 
     submit = SubmitField('Submit')
