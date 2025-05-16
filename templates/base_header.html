@@ -19,7 +19,7 @@
     <!-- link buttons group -->
     <div class="btn-group btn-group-lg" role="group" aria-label="link buttons group" style="position: fixed; display: inline-block; margin-left: 20px; margin-top: 20px">
       <a href="/series" class="btn btn-danger"><b class="gtext">Series</b></a>
-      <a href="/loc" class="btn btn-danger"><b class="gtext">Locations</b></a>
+      <a href="/loc" class="btn btn-danger disabled"><b class="gtext">Locations</b></a>
       {% if current_user.is_authenticated %}
       <a href="/discussions" class="btn btn-danger"><b class="gtext">Discussions</b></a>
       {% endif %}
@@ -31,9 +31,6 @@
       <button type="button" class="btn btn-danger btn-lg dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
       </button>
         <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">-</a></li>
-            <li><a class="dropdown-item" href="#">-</a></li>
-            <li><a class="dropdown-item" href="#">-</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="/logout">Log out</a></li>
         </ul>

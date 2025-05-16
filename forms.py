@@ -77,7 +77,28 @@ class SerieForm(FlaskForm):
 
     mat = SelectField('Material', choices=('Panel', 'Brick', 'Block', 'Monolith'), validators=[DataRequired()])
 
-    period = SelectField('Material', choices=('STAL', 'HRUSCH', 'BRZH', 'GORB', 'ELTS', 'PTN'),
+    period = SelectField('Period', choices=('STAL', 'HRUSCH', 'BRZH', 'GORB', 'ELTS', 'PTN'),
+                         validators=[DataRequired()])
+
+    desc = StringField('Description', validators=[length(max=500, message='Too long description (limit is 500')])
+
+    submit = SubmitField('Submit')
+
+
+class TypeForm(FlaskForm):
+    """Type form, includes:\n
+    type suffix [**name**],\n
+    description [**desc**],\n
+    region dropdown [**region**],\n
+    period dropdown [**period**],\n
+    default submission field [**submit**]"""
+    name = StringField('Type suffix', validators=[DataRequired(),
+                                                  length(max=50, message='Too long name (limit is 50)')])
+
+    region = SelectField('Region', choices=('I (North)', 'II (Moderate)', 'III (Warm)', 'IV (South)'),
+                         validators=[DataRequired()])
+
+    period = SelectField('Period', choices=('STAL', 'HRUSCH', 'BRZH', 'GORB', 'ELTS', 'PTN'),
                          validators=[DataRequired()])
 
     desc = StringField('Description', validators=[length(max=500, message='Too long description (limit is 500')])

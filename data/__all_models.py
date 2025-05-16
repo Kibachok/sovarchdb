@@ -12,7 +12,6 @@ class Region(SqlAlchemyBase):
     __tablename__ = 'regions'
     id = Column(Integer, primary_key=True, index=True, autoincrement=True)
     name = Column(String, nullable=False)
-    climate_zone = Column(String, nullable=False)
 
 
 class Series(SqlAlchemyBase):
