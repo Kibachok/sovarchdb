@@ -1,15 +1,23 @@
 {% extends "base_header.html" %}
 
 {% block content %}
-  <!-- profile - head part (avatar, nickname, username) -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb" style="font-size: 30px; font-weight: bold">
+      <li class="breadcrumb-item"><a href="/">Index</a></li>
+      <li class="breadcrumb-item"><a href="/series">Series</a></li>
+      <li class="breadcrumb-item"><a href="/series/{{ sid }}">{{ serie }}</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Types</li>
+    </ol>
+  </nav>
+  <!-- main body -->
   <h2 class="obvod_header">{{ serie }} - types</h2>
   <div class="row_left area_padding_soft">
-    <div class="row_left">
+    <!-- div class="row_left">
       <h3>Sort by:</h3>
       <ul>
         <li>period override</li>
       </ul>
-    </div>
+    </div -->
   </div>
 {% if typelist|length != 0 %}
   <table class="table table-bordered">
@@ -19,7 +27,7 @@
         <th><h4>Period override</h4></th>
         <th><h4>Region</h4></th>
         <th><h4>Description</h4></th>
-        <th><h4>Images</h4></th>
+        <th><h4>Image</h4></th>
       </tr>
     </thead>
     {% for type in typelist %}
@@ -29,14 +37,98 @@
         <td><p>{{ type.override_period }}</p></td>
         <td><p>{{ type.region }}</p></td>
         <td><p>{{ type.description }}</p></td>
-        <td><p>[images]</p></td>
+        <td><p>{% if type.img %}<img src="/static/img/series/types/{{ sid }}-{{ type.id }}/0.jpg">{% endif %}</p></td>
       </tr>
     </tbody>
     {% endfor %}
   </table>
+  {% if current_user.is_authenticated and perm(current_user.role).add_data %}
+    <h2><a href="/series/{{ sid }}/types/new" class="btn btn-warning"><h3>Add a new type for {{ serie }}</h3></a></h2>
+  {% endif %}
+  <!-- pages -->
+  {% if page == 1 and page != maxpage %}
+  <nav aria-label="pages">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="/series/{{ sid }}/types?page={{ page - 1 }}&elems={{ elems }}" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item active">
+      <span class="page-link">
+        1
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item"><a class="page-link" href="/series/{{ sid }}/types?page={{ maxpage }}&elems={{ elems }}">{{ maxpage }}</a></li>
+    <li class="page-item">
+      <a class="page-link" href="/series/{{ sid }}/types?page={{ page + 1 }}&elems={{ elems }}">Next</a>
+    </li>
+  </ul>
+  </nav>
+  {% elif page != maxpage and page != 1 %}
+  <nav aria-label="pages">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="/series/{{ sid }}/types?page={{ page - 1 }}&elems={{ elems }}" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="/series/{{ sid }}/types?page=1&elems={{ elems }}">1</a></li>
+    <li class="page-item active">
+      <span class="page-link">
+        {{ page }}
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item"><a class="page-link" href="/series/{{ sid }}/types?page={{ maxpage }}&elems={{ elems }}">{{ maxpage }}</a></li>
+    <li class="page-item">
+      <a class="page-link" href="/series/{{ sid }}/types?page={{ page + 1 }}&elems={{ elems }}">Next</a>
+    </li>
+  </ul>
+  </nav>
+  {% elif page == maxpage and page != 1 %}
+  <nav aria-label="pages">
+  <ul class="pagination justify-content-center">
+    <li class="page-item">
+      <a class="page-link" href="/series/{{ sid }}/types?page={{ page - 1 }}&elems={{ elems }}" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="/series/{{ sid }}/types?page=1&elems={{ elems }}">1</a></li>
+    <li class="page-item active">
+      <span class="page-link">
+        {{ page }}
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item disabled">
+      <span class="page-link">
+        Next
+      </span>
+    </li>
+  </ul>
+  </nav>
+  {% elif page == 1 and page == maxpage %}
+  <nav aria-label="pages">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link" href="/series/{{ sid }}/types?page=1&elems={{ elems }}" tabindex="-1">Previous</a>
+    </li>
+    <li class="page-item active">
+      <span class="page-link">
+        1
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+    <li class="page-item disabled">
+      <span class="page-link">
+        Next
+      </span>
+    </li>
+  </ul>
+  </nav>
+  {% endif %}
 {% else %}
   <br>
   <br>
   <h1>The list is empty</h1>
+  {% if current_user.is_authenticated and perm(current_user.role).add_data %}
+    <h2><a href="/series/{{ sid }}/types/new" class="btn btn-warning"><h3>Add a new type for {{ serie }}</h3></a></h2>
+  {% endif %}
 {% endif %}
 {% endblock %}

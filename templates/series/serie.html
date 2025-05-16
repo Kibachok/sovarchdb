@@ -1,6 +1,14 @@
 {% extends "base_header.html" %}
 
 {% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb" style="font-size: 30px; font-weight: bold">
+      <li class="breadcrumb-item"><a href="/">Index</a></li>
+      <li class="breadcrumb-item"><a href="/series">Series</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ serie.name }}</li>
+    </ol>
+  </nav>
+  <!-- main body -->
   <h2 class="obvod_header">Series - {{ serie.name }}</h2>
   <div class="area_padding_soft">
     <h3>Period - {{ serie.period }}</h3>
@@ -39,14 +47,6 @@
     </div>
   </div>
   {% endif %}
-  <form action="" method="post" novalidate enctype="multipart/form-data">
-    <h4><b>Upload an image</b></h4>
-      <input type="file" class="form-control-file" id="img" name="img">
-      {% if imge %}
-        <div class="alert alert-danger" role="alert">
-          <b>{{ imge }}</b>
-        </div>
-      {% endif %}
-    <button type="submit" class="btn btn-primary">Submit an image</button>
-  </form>
+  <br>
+  <h2><a href="/series/{{ serie.id }}/gallery" class="btn btn-warning btn-lg"><b>Show full gallery</b></a></h2>
 {% endblock %}

@@ -2,7 +2,7 @@
 @font-face {
   font-family: Revoluzia;
   src: local(Revoluzia) format(opentype),
-       url(http://127.0.0.1:8080/static/fonts/Revoluzia/Revoluzia.otf) format(opentype);
+       url(/static/fonts/Revoluzia/Revoluzia.otf) format(opentype);
 }
 /* headers mod */
 h1 {
