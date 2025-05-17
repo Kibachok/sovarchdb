@@ -1,0 +1,53 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb" style="font-size: 30px; font-weight: bold">
+      <li class="breadcrumb-item"><a href="/">Index</a></li>
+      <li class="breadcrumb-item"><a href="/series">Series</a></li>
+      <li class="breadcrumb-item"><a href="/series/{{ sid }}">{{ serie }}</a></li>
+      <li class="breadcrumb-item"><a href="/series/{{ sid }}/types">Types</a></li>
+      <li class="breadcrumb-item active" aria-current="page">{{ type.name }}</li>
+    </ol>
+  </nav>
+  <h2 class="obvod_header">{{ serie }}-{{ type.name }}</h2>
+  <div class="area_padding_soft">
+    <h3>Period - {{ type.period }}</h3>
+    <h3>Climatic zone - {{ type.region }}</h3>
+    <h3 style="text-align: center">Description:</h3>
+    <p style="text-align: center">{{ type.description }}</p>
+    <h3 style="text-align: center"><a href="/">Click here</a> to see its discussions category</h3>
+  </div>
+  <!-- gallery -->
+  <h3 style="text-align: center">Gallery</h3>
+  {% if not files %}
+  <p>There's no images for now<br>but you can add your own</p>
+  {% else %}
+  <div id="carousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      {% for i in files %}
+      {% if loop.first %}
+      <button type="button" data-bs-target="#carousel" data-bs-slide-to="{{ loop.index - 1 }}" class="active" aria-current="true" aria-label='Slide 1'></button>
+      {% else %}
+      <button type="button" data-bs-target="#carousel" data-bs-slide-to="{{ loop.index - 1 }}" aria-label='Slide {{ loop.index }}'></button>
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div style="width: 75%; margin: auto" class="carousel-inner">
+      {% for path in files %}
+      {% if loop.first %}
+      <div class="carousel-item active">
+        <img style="width: 75%; height: 75%;" src="/static/img/series/types/{{ sid }}-{{ tid }}/{{ loop.index - 1 }}.jpg" class="d-block w-100" alt="{{ i }}">
+      </div>
+      {% else %}
+      <div class="carousel-item">
+        <img style="width: 75%; height: 75%;" src="/static/img/series/types/{{ sid }}-{{ tid }}/{{ loop.index - 1 }}.jpg" class="d-block w-100" alt="{{ i }}">
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+  <br>
+  <h2><a href="/series/{{ sid }}/types/{{ tid }}/gallery" class="btn btn-warning btn-lg"><b>Show full gallery</b></a></h2>
+{% endblock %}

@@ -1,0 +1,14 @@
+[
+  {
+    "keyhash": "fc28dca24ddbf7557aa1cf98150c31d242f8c964d97f7f254614fd2587c4b638",
+    "priv_mask": 1
+  },
+  {
+    "keyhash": "b0259d1a0a6035b3d22760c096b4489557988ccdc2f329c3655626da88ee8890",
+    "priv_mask": 16
+  },
+  {
+    "keyhash": "8bd38035cc5bb5a3fd6e5516cf1988d7f5abc4a0b99a29fb8b7f6be774f8ce2a",
+    "priv_mask": 48
+  }
+]

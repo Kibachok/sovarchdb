@@ -1,0 +1,64 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <!-- profile - head part (avatar, nickname, username) -->
+  {% if form %}
+    <form action="" method="post" novalidate enctype="multipart/form-data">
+    {{ form.hidden_tag() }}
+  {% endif %}
+  <div class="row_left area_padding_soft">
+      <img src="/static/img/u_pfps/{{ imgp }}" alt="picforprofile_default" class="obvod" width="256" height="256">
+      <div>
+        {% if form %}
+          <div>
+            <h4 style="margin-left: 10px"><b>{{ form.nickname(class="form-control") }}{{ form.nickname.label }}</b></h4>
+          </div>
+        {% else %}
+          <h3><b style="margin-left: 10px; color: #202020; font-family: Sans-serif; font-size: 40px;">{% if usr.nickname %}{{ usr.nickname }}{% else %}{{ usr.login }}{% endif %}</b></h3>
+        {% endif %}
+        {% if not usr.nickname and current_user.id == usr.id %}
+        <h3 class="weak_text" style="margin-left: 10px">{{ usr.login }}</h3>
+        {% else %}
+        <br>
+        {% endif %}
+        <br>
+        <br>
+        <br>
+        <br>
+        <h4 class="weak_text" style="margin-left: 10px">Member</h4>
+        <h4 class="weak_text" style="margin-left: 10px">Registered at: {{ usr.register_date.strftime("%b-%d %Y, %H-%M-%S") }}</h4>
+        {% if (current_user.id == usr.id) and not form %}
+          <a class="btn btn-secondary" href="/uprofile/{{ usr.id }}/edit" style="margin-left: 10px">Edit profile</a>
+        {% endif %}
+      </div>
+  </div>
+  <div class="area_padding_soft">
+    {% if form %}
+        <h4><b>Upload an avatar</b></h4>
+        <input type="file" class="form-control-file" id="avatar" name="avatar">
+        {% if imge %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ imge }}</b>
+            </div>
+        {% endif %}
+      {% endif %}
+  </div>
+  {% if form %}
+  <div class="area_padding_danger">
+    <h4>{{ form.rolecode(class="form-control") }} {{ form.rolecode.label }}</h4>
+    <h4>{{ form.save()}} {{ form.save.label }}</h4>
+    <h4>{{ form.submit(type="submit", class="btn btn-warning", style="font-size: 30px; font-weight: bold") }}</h4>
+    <br>
+    <br>
+    <br>
+    <h4 style="background-color: red; color: yellow">{{ form.delete() }} {{ form.delete.label }}</h4>
+  </div>
+  </form>
+  {% endif %}
+  <!-- profile - body part (forum posting, suggested series. idk) -->
+  <h3>Posted at:</h3>
+  <ul>
+    <li style="font-size: 25px">Some forum post 1 (hyperlink)</li>
+    <li style="font-size: 25px">Some forum post 2 (hyperlink)</li>
+  </ul>
+{% endblock %}

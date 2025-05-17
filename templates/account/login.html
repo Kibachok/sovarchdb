@@ -1,0 +1,30 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <h1>User login</h1>
+  <img src="/static/img/login.png" alt="login" height="256" width="256" class="center">
+  <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.uname.label }}</b></h3>
+            {{ form.uname(class="form-control") }}<br><br>
+        {% for error in form.uname.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.passwd.label }}</b></h3>
+            {{ form.passwd(class="form-control", type="password") }}<br><br>
+        {% for error in form.passwd.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <p>{{ form.rmmb() }} {{ form.rmmb.label }}</p>
+        <br>
+        <p>{{ form.submit(type="submit", class="btn btn-primary", style="font-size: 30px; font-weight: bold") }}</p>
+  </form>
+{% endblock %}

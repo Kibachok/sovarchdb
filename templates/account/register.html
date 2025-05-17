@@ -1,0 +1,46 @@
+{% extends "base_header.html" %}
+
+{% block content %}
+  <h1>User register</h1>
+  <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.uname.label }}</b></h3>
+            {{ form.uname(class="form-control") }}<br><br>
+        {% for error in form.uname.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.passwd.label }}</b></h3>
+            {{ form.passwd(class="form-control", type="password") }}<br><br>
+        {% for error in form.passwd.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.passwd_r.label }}</b></h3>
+            {{ form.passwd_r(class="form-control", type="password") }}<br><br>
+        {% for error in form.passwd_r.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <div class="row">
+            <h3><b style="text-align: center">{{ form.nickname.label }}</b></h3>
+            {{ form.nickname(class="form-control") }}<br><br>
+        {% for error in form.nickname.errors %}
+            <div class="alert alert-danger" role="alert">
+                <b>{{ error }}</b>
+            </div>
+        {% endfor %}
+        </div>
+        <br>
+        <p>{{ form.submit(type="submit", class="btn btn-primary", style="font-size: 30px; font-weight: bold") }}</p>
+  </form>
+{% endblock %}

@@ -1,4 +1,5 @@
 # sovarchdb
+It is hosted here now: https://sadb.ngskd.ru
 ## Soviet Arch Database project repo
 
 **SADB** - web project made as structured storage of data about soviet type architecture all across the world *(starting from sochi)*
@@ -15,6 +16,19 @@ Also there will be **social part** - account system and forums where people can 
       Main page (index)
        |      |     |
       \ /     |    \ /
-   Series DB \ /  Login --> Forum
+    SeriesDB \ /  Login --> Forum
       | "City plan" DB -------^ ^
       L_________________________/
+
+# Current status
+For now, there are only part of the planned stuff ready to be used
+We already have:
+    <ul>
+    <li> User system + roles (you can receive role using special role code)
+    <li> Series tab with ability to upload new houses series and images for them if you have special role
+    </ul>
+And now there's still stuff to be done, such as:
+    <ul>
+    <li> 'Locations' tab where you can find (probably) your city and get tab of its typearch.
+    <li> Forum where you can discuss series, specific houses and types.
+    </ul>
